@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br from-[#D0B9A7] to-[#B5A192] min-h-screen flex items-center justify-center p-4">
+
     <div class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-2xl w-[400px]">
         <div class="text-center mb-8">
             <i class="fas fa-user-circle text-[#714329] text-5xl mb-4"></i>
@@ -15,24 +16,24 @@
             <p class="text-[#B5A192]">Login to your account</p>
         </div>
 
-        <form class="space-y-6">
+        <form id="loginForm" class="space-y-6">
             <div class="relative">
                 <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-[#714329]"></i>
-                <input type="email" placeholder="Email" 
-                    class="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#714329] bg-white/50">
+                <input type="email" id="loginEmail" placeholder="Email" 
+                    class="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#714329] bg-white/50" required>
             </div>
             
             <div class="relative">
                 <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-[#714329]"></i>
-                <input type="password" placeholder="Password" 
-                    class="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#714329] bg-white/50">
+                <input type="password" id="loginPassword" placeholder="Password" 
+                    class="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#714329] bg-white/50" required>
             </div>
 
             <div class="flex justify-between items-center">
                 <label class="flex items-center text-sm text-[#714329]">
                     <input type="checkbox" class="mr-2 accent-[#714329]">
                     Remember me
-                  </label>
+                </label>
                 <a href="#" class="text-sm text-[#714329] hover:text-[#B5A192]">Forgot Password?</a>
             </div>
 
@@ -40,7 +41,8 @@
                 class="w-full bg-[#714329] text-white py-3 rounded-lg hover:bg-[#B5A192] transition-all duration-300">
                 Login
             </button>
-                <div class="text-center">
+
+            <div class="text-center">
                 <p class="text-[#714329]">
                     Don't have an account? 
                     <a href="signup.html" class="font-bold hover:text-[#B5A192]">Sign Up</a>
@@ -57,13 +59,44 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <button class="flex items-center justify-center gap-2 py-2.5 border-2 border-[#714329] text-[#714329] rounded-lg hover:bg-[#714329] hover:text-white transition-colors">
-                    <i class="fab fa-google"></i>
-                    Google
+                    <i class="fab fa-google"></i> Google
                 </button>
                 <button class="flex items-center justify-center gap-2 py-2.5 border-2 border-[#714329] text-[#714329] rounded-lg hover:bg-[#714329] hover:text-white transition-colors">
-                    <i class="fab fa-facebook"></i>
-                    Facebook
+                    <i class="fab fa-facebook"></i> Facebook
                 </button>
             </div>
         </div>
     </div>
+
+    <script>
+        // Fake async API simulation
+        async function fakeLoginAPI(email, password) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (email && password) {
+                        resolve({ success: true, message: "Login successful! Searching for API key..." });
+                    } else {
+                        reject({ success: false, message: "Login failed! Missing credentials." });
+                    }
+                }, 1000);
+            });
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            try {
+                const response = await fakeLoginAPI(email, password);
+                if (response.success) {
+                    alert(response.message);
+                }
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    </script>
+</body>
+</html>
