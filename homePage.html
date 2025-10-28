@@ -171,5 +171,49 @@
     </div>
   </footer>
 
+   <!-- ✅ JavaScript Section -->
+  <script>
+    const API_URL = "https://jsonplaceholder.typicode.com/posts";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ✅ Fetching recent items using REST API
+    async function loadRecentItems() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        console.log("REST API Response:", data);
+
+        const itemsDisplay = document.getElementById("recent-items");
+        itemsDisplay.textContent = data.slice(0, 5).map(post => post.title).join(" • ");
+      } catch (err) {
+        console.error("API Error:", err);
+        document.getElementById("recent-items").textContent = "Failed to load items!";
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", loadRecentItems);
+
+  
+    document.getElementById("search-btn").addEventListener("click", async () => {
+      const searchText = document.getElementById("search-input").value.trim();
+      if (!searchText) return alert("Please enter item name!");
+
+      try {
+        const res = await fetch(API_URL); 
+        const data = await res.json();
+
+        console.log("Search Query:", searchText);
+        console.log("Search Results from REST API:", data.slice(0, 5));
+
+        alert("REST API Search successful! Check console for data ✅");
+      } catch (error) {
+        alert("Error fetching search results!");
+      }
+    });
+  </script>
+
+
 </body>
 </html>
