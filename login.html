@@ -3,100 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gradient-to-br from-[#D0B9A7] to-[#B5A192] min-h-screen flex items-center justify-center p-4">
+    <title>ReClaim | Login</title>
 
-    <div class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-2xl w-[400px]">
-        <div class="text-center mb-8">
-            <i class="fas fa-user-circle text-[#714329] text-5xl mb-4"></i>
-            <h2 class="text-3xl font-bold text-[#714329]">Welcome Back</h2>
-            <p class="text-[#B5A192]">Login to your account</p>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background: #F9F5F2;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center px-4">
+
+    <!-- Card -->
+    <div class="bg-white shadow-xl rounded-2xl p-8 w-[380px]">
+
+        <!-- Logo -->
+        <div class="flex flex-col items-center mb-6">
+            <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-user text-white text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold mt-3 text-gray-800">Welcome Back</h2>
+            <p class="text-gray-500 text-sm">Login to continue</p>
         </div>
 
-        <form id="loginForm" class="space-y-6">
-            <div class="relative">
-                <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-[#714329]"></i>
-                <input type="email" id="loginEmail" placeholder="Email" 
-                    class="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#714329] bg-white/50" required>
-            </div>
-            
-            <div class="relative">
-                <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-[#714329]"></i>
-                <input type="password" id="loginPassword" placeholder="Password" 
-                    class="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#714329] bg-white/50" required>
+        <!-- Form -->
+        <form id="loginForm" class="space-y-5">
+
+            <div>
+                <label class="text-sm font-medium text-gray-600">Email</label>
+                <div class="relative mt-1">
+                    <i class="fa-solid fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="email" id="loginEmail"
+                        class="w-full pl-10 pr-4 py-3 border rounded-lg focus:border-red-600 outline-none"
+                        placeholder="Enter your email" required>
+                </div>
             </div>
 
-            <div class="flex justify-between items-center">
-                <label class="flex items-center text-sm text-[#714329]">
-                    <input type="checkbox" class="mr-2 accent-[#714329]">
-                    Remember me
-                </label>
-                <a href="#" class="text-sm text-[#714329] hover:text-[#B5A192]">Forgot Password?</a>
+            <div>
+                <label class="text-sm font-medium text-gray-600">Password</label>
+                <div class="relative mt-1">
+                    <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="password" id="loginPassword"
+                        class="w-full pl-10 pr-4 py-3 border rounded-lg focus:border-red-600 outline-none"
+                        placeholder="Enter your password" required>
+                </div>
             </div>
 
-            <button type="submit" 
-                class="w-full bg-[#714329] text-white py-3 rounded-lg hover:bg-[#B5A192] transition-all duration-300">
+            <button type="submit"
+                class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
                 Login
             </button>
 
-            <div class="text-center">
-                <p class="text-[#714329]">
-                    Don't have an account? 
-                    <a href="signup.html" class="font-bold hover:text-[#B5A192]">Sign Up</a>
-                </p>
-            </div>
+            <p class="text-center text-sm text-gray-600">
+                Don't have an account?
+                <a href="signup.html" class="text-red-600 font-semibold hover:underline">Sign Up</a>
+            </p>
         </form>
-
-        <div class="mt-6">
-            <div class="relative flex items-center my-6">
-                <div class="flex-grow border-t border-[#B5A192]"></div>
-                <span class="mx-4 text-[#714329]">Or continue with</span>
-                <div class="flex-grow border-t border-[#B5A192]"></div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <button class="flex items-center justify-center gap-2 py-2.5 border-2 border-[#714329] text-[#714329] rounded-lg hover:bg-[#714329] hover:text-white transition-colors">
-                    <i class="fab fa-google"></i> Google
-                </button>
-                <button class="flex items-center justify-center gap-2 py-2.5 border-2 border-[#714329] text-[#714329] rounded-lg hover:bg-[#714329] hover:text-white transition-colors">
-                    <i class="fab fa-facebook"></i> Facebook
-                </button>
-            </div>
-        </div>
     </div>
 
+    <!-- JS -->
     <script>
-        // Fake async API simulation
         async function fakeLoginAPI(email, password) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    if (email && password) {
-                        resolve({ success: true, message: "Login successful! Searching for API key..." });
-                    } else {
-                        reject({ success: false, message: "Login failed! Missing credentials." });
-                    }
-                }, 1000);
+                    if (email && password) resolve({ success: true, message: "Login successful!" });
+                    else reject({ success: false, message: "Missing credentials!" });
+                }, 900);
             });
         }
 
-        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
             e.preventDefault();
-
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
+            const email = loginEmail.value;
+            const pass = loginPassword.value;
 
             try {
-                const response = await fakeLoginAPI(email, password);
-                if (response.success) {
-                    alert(response.message);
-                }
-            } catch (error) {
-                alert(error.message);
+                const r = await fakeLoginAPI(email, pass);
+                alert(r.message);
+            } catch (err) {
+                alert(err.message);
             }
         });
     </script>
+
 </body>
+
 </html>
