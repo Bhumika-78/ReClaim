@@ -1,7 +1,4 @@
 {
-  "buildCommand": "cd ReClaim && npm install && npm run build",
-  "outputDirectory": "ReClaim/dist",
-  "installCommand": "cd ReClaim && npm install",
   "rewrites": [
     {
       "source": "/(.*)",
