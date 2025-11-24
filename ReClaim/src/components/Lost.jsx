@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Lost = () => {
 
-  const [formData, setFormData] = useState({});
-  const handleChange = () => {};
+  const [formData, setFormData] = useState({ title: '', category: '', location: '', date: '', description: '', contact: '' });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    // simple submit feedback
+    alert('Item submitted');
+    // redirect to lost-items listing
+    navigate('/lost-items');
   };
 
   return (
@@ -35,17 +45,22 @@ const Lost = () => {
         >
           {/* Title Input */}
           <input
+            name="title"
             type="text"
             placeholder="e.g. Black backpack, ID card, Laptop"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             onChange={handleChange}
+            value={formData.title}
           />
 
           {/* Category */}
           <select
+            name="category"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             onChange={handleChange}
+            value={formData.category}
           >
+            <option value="">Select category</option>
             <option>Accessories</option>
             <option>Electronics</option>
             <option>ID Cards</option>
@@ -57,33 +72,41 @@ const Lost = () => {
 
           {/* Location */}
           <input
+            name="location"
             type="text"
             placeholder="e.g. Central Library, Block A - Room 204"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             onChange={handleChange}
+            value={formData.location}
           />
 
           {/* Date Lost */}
           <input
+            name="date"
             type="date"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             onChange={handleChange}
+            value={formData.date}
           />
 
           {/* Description */}
           <textarea
+            name="description"
             rows="4"
             placeholder="Include color, brand, unique marks, contents, etc."
             className="w-full px-3 py-2 border border-gray-300 rounded-lg resize-y"
             onChange={handleChange}
+            value={formData.description}
           />
 
           {/* Contact */}
           <input
+            name="contact"
             type="text"
             placeholder="Phone number or email"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             onChange={handleChange}
+            value={formData.contact}
           />
 
           <button

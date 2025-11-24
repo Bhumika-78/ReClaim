@@ -12,6 +12,8 @@ const Found = () => {
       id: 1,
       title: 'Black Leather Wallet',
       date: 'Found on 3/15/2024',
+      category: 'Accessories',
+      location: 'Student Union',
       description: 'Black leather wallet found on study desk. Contains cards but no cash.',
       image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop',
     },
@@ -19,6 +21,8 @@ const Found = () => {
       id: 2,
       title: 'iPhone 14 Pro',
       date: 'Found on 3/14/2024',
+      category: 'Electronics',
+      location: 'Student Union',
       description: 'Cracked screen iPhone with blue case. Found near food court.',
       image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop',
     },
@@ -26,6 +30,8 @@ const Found = () => {
       id: 3,
       title: 'Set of House Keys',
       date: 'Found on 3/13/2024',
+      category: 'Misc',
+      location: 'Parking Lot B',
       description: 'Keys with colorful keychain and car key fob.',
       image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
     },
@@ -33,6 +39,8 @@ const Found = () => {
       id: 4,
       title: 'Calculus Textbook',
       date: 'Found on 3/12/2024',
+      category: 'Books',
+      location: 'Central Library',
       description: 'Calculus textbook with highlighted pages and student notes.',
       image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
     },
@@ -41,13 +49,28 @@ const Found = () => {
   ];
 
 useEffect(() => {
-  const filtered = items.filter((item) =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const q = searchQuery.trim().toLowerCase();
+
+  const filtered = items.filter((item) => {
+    const title = (item.title || '').toLowerCase();
+    const desc = (item.description || '').toLowerCase();
+    const cat = (item.category || '').toLowerCase();
+    const loc = (item.location || '').toLowerCase();
+
+    const matchesSearch =
+      q === '' || title.includes(q) || desc.includes(q);
+
+    const matchesCategory =
+      categoryFilter === 'All' || cat === categoryFilter.toLowerCase();
+
+    const matchesLocation =
+      locationFilter === 'All' || loc === locationFilter.toLowerCase();
+
+    return matchesSearch && matchesCategory && matchesLocation;
+  });
 
   setFilteredItems(filtered);
-}, [searchQuery]);
+}, [searchQuery, categoryFilter, locationFilter]);
   const handleReset = () => {
     setSearchQuery('');
     setCategoryFilter('All');
